@@ -1,9 +1,9 @@
 // ── À MODIFIER À CHAQUE DÉPLACEMENT ──
 // Changez uniquement "name", "lat" et "lng" ci-dessous, puis publiez.
 const CURRENT_LOCATION = {
-  name: "Antsiranana, Madagascar",
-  lat: -12.2787,
-  lng: 49.2917,
+  name: "Belle Rose, Antsiranana, Madagascar",
+  lat: -12.287731,
+  lng: 49.309601,
 };
 // ──────────────────────────────────────
 
