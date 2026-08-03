@@ -8,6 +8,20 @@ Site portfolio statique (HTML/CSS/JS, sans dépendance), généré à partir du 
 2. **LinkedIn** : dans [index.html](index.html), remplacez le `href="#"` du lien `id="linkedinLink"` par l'URL réelle de votre profil LinkedIn.
 3. Relisez les textes des sections (Formation, Expériences, etc.) et ajustez si besoin.
 
+## Mettre à jour votre position sur la carte
+
+Ouvrez [location.js](location.js) et modifiez uniquement les 3 valeurs en haut du fichier :
+
+```js
+const CURRENT_LOCATION = {
+  name: "Votre ville, Madagascar",
+  lat: 0.0000,   // latitude
+  lng: 0.0000,   // longitude
+};
+```
+
+Pour trouver les coordonnées d'une ville, cherchez son nom sur [openstreetmap.org](https://www.openstreetmap.org), clic droit sur le point → "Afficher l'adresse" affiche lat/lng. Puis republiez (commit + push).
+
 ## Aperçu en local
 
 Ouvrez simplement `index.html` dans un navigateur, ou lancez un petit serveur local :
