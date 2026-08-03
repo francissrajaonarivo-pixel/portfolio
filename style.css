@@ -424,6 +424,33 @@ body {
 }
 .leaflet-marker-icon { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35)); }
 
+.pulse-marker { position: relative; width: 22px; height: 22px; }
+.pulse-dot {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 16px; height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  background: var(--c2);
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+.pulse-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 22px; height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  background: var(--c2);
+  opacity: 0.6;
+  animation: pulse-ring-anim 1.8s ease-out infinite;
+}
+@keyframes pulse-ring-anim {
+  0% { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
 @media (max-width: 720px) {
   .map-box { height: 460px; }
 }
