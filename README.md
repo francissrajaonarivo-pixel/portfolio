@@ -1,4 +1,4 @@
-# Portfolio — Rajaonaorivo Harinaivo Jean François
+# Portfolio — Rajaonarivo Harinaivo Jean Francis
 
 Site portfolio statique (HTML/CSS/JS, sans dépendance), généré à partir du CV.
 
