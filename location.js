@@ -8,16 +8,16 @@ const CURRENT_LOCATION = {
 // ──────────────────────────────────────
 
 const MADAGASCAR_VIEW = { lat: -18.766, lng: 46.869, zoom: 5.4 };
-const MY_ZOOM = 16;
+const MY_ZOOM = 18;
 
 document.getElementById("locLabel").textContent = `📍 Position actuelle : ${CURRENT_LOCATION.name}`;
 
 const map = L.map("map", {
   zoomSnap: 0.25,
   zoomDelta: 0.5,
-  wheelPxPerZoomLevel: 90,
+  wheelPxPerZoomLevel: 60,
   minZoom: 3,
-  maxZoom: 19,
+  maxZoom: 22,
   worldCopyJump: true,
 }).setView([-14, 46.869], 2.5);
 
@@ -26,15 +26,15 @@ const satellite = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   {
     attribution: "Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics",
-    maxZoom: 19,
-    maxNativeZoom: 17,
+    maxZoom: 22,
+    maxNativeZoom: 19,
   }
 );
 
 // Repères administratifs : régions, provinces, frontières
 const boundaries = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 19, maxNativeZoom: 16 }
+  { maxZoom: 22, maxNativeZoom: 16 }
 );
 
 // Noms de lieux (villes, villages, quartiers) — couche dense, complémentaire
@@ -42,7 +42,7 @@ const placeLabels = L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
   {
     attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
-    maxZoom: 19,
+    maxZoom: 22,
     maxNativeZoom: 18,
     subdomains: "abcd",
   }
@@ -50,7 +50,8 @@ const placeLabels = L.tileLayer(
 
 const streets = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  maxZoom: 19,
+  maxZoom: 22,
+  maxNativeZoom: 19,
 });
 
 // Vue par défaut : satellite + toutes les couches de repères (régions, frontières, noms de lieux)
@@ -64,7 +65,7 @@ L.control
   )
   .addTo(map);
 
-L.control.scale({ imperial: false, position: "bottomleft" }).addTo(map);
+L.control.scale({ imperial: false, position: "bottomleft", maxWidth: 150 }).addTo(map);
 
 // Marqueur bien visible avec pastille pulsante
 const pulseIcon = L.divIcon({
