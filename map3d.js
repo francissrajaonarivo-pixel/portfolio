@@ -14,6 +14,7 @@ function build3DStyle() {
           "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         ],
         tileSize: 256,
+        maxzoom: 19,
         attribution: "Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics",
       },
       terrainSource: {
@@ -65,6 +66,8 @@ function init3D() {
     bearing: -20,
     antialias: true,
     maxPitch: 85,
+    maxZoom: 24,
+    minZoom: 0,
   });
 
   map3dInstance.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
