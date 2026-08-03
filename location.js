@@ -17,7 +17,7 @@ const map = L.map("map", {
   zoomDelta: 0.5,
   wheelPxPerZoomLevel: 60,
   minZoom: 3,
-  maxZoom: 22,
+  maxZoom: 28,
   worldCopyJump: true,
 }).setView([-14, 46.869], 2.5);
 
@@ -26,7 +26,7 @@ const satellite = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   {
     attribution: "Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics",
-    maxZoom: 22,
+    maxZoom: 28,
     maxNativeZoom: 19,
   }
 );
@@ -34,7 +34,7 @@ const satellite = L.tileLayer(
 // Repères administratifs : régions, provinces, frontières
 const boundaries = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 22, maxNativeZoom: 16 }
+  { maxZoom: 28, maxNativeZoom: 16 }
 );
 
 // Noms de lieux (villes, villages, quartiers) — couche dense, complémentaire
@@ -42,7 +42,7 @@ const placeLabels = L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
   {
     attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
-    maxZoom: 22,
+    maxZoom: 28,
     maxNativeZoom: 18,
     subdomains: "abcd",
   }
@@ -50,7 +50,7 @@ const placeLabels = L.tileLayer(
 
 const streets = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  maxZoom: 22,
+  maxZoom: 28,
   maxNativeZoom: 19,
 });
 
