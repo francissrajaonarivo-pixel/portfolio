@@ -22,6 +22,8 @@ const CURRENT_LOCATION = {
 
 Pour trouver les coordonnées d'une ville, cherchez son nom sur [openstreetmap.org](https://www.openstreetmap.org), clic droit sur le point → "Afficher l'adresse" affiche lat/lng. Puis republiez (commit + push).
 
+**Important** : après chaque mise à jour de `location.js`, augmentez le numéro de version dans [index.html](index.html) (`location.js?v=3` → `?v=4`, etc.). Sans ça, les navigateurs qui ont déjà visité le site gardent l'ancienne position en cache jusqu'à 10 minutes.
+
 ## Aperçu en local
 
 Ouvrez simplement `index.html` dans un navigateur, ou lancez un petit serveur local :
