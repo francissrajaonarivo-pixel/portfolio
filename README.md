@@ -24,25 +24,6 @@ Pour trouver les coordonnées d'une ville, cherchez son nom sur [openstreetmap.o
 
 **Important** : après chaque mise à jour de `location.js`, augmentez le numéro de version dans [index.html](index.html) (`location.js?v=3` → `?v=4`, etc.). Sans ça, les navigateurs qui ont déjà visité le site gardent l'ancienne position en cache jusqu'à 10 minutes.
 
-## Ajouter du contenu lourd (vidéos, photos HD, PDF de projets)
-
-GitHub Pages est gratuit mais a des limites : ~100 Mo max par fichier, dépôt recommandé sous 1 Go, ~100 Go de bande passante/mois. Pour rester rapide et professionnel :
-
-- **Vidéos** : ne jamais les mettre directement dans le dépôt. Publiez-les sur YouTube ou Vimeo (non répertorié si besoin de discrétion), puis intégrez-les avec la classe déjà prête dans [style.css](style.css) :
-  ```html
-  <div class="video-embed">
-    <iframe src="https://www.youtube.com/embed/VOTRE_ID" loading="lazy" allowfullscreen></iframe>
-  </div>
-  ```
-- **Photos de projets (galerie)** : compressez-les avant import (viser <300 Ko/photo, [squoosh.app](https://squoosh.app) fait ça gratuitement), placez-les dans `assets/`, et utilisez :
-  ```html
-  <div class="photo-gallery">
-    <img src="assets/projet1.jpg" alt="..." loading="lazy" decoding="async">
-  </div>
-  ```
-  `loading="lazy"` évite de charger les images hors écran tant que le visiteur n'a pas scrollé jusque-là.
-- **Rapports/PDF techniques** : comme pour le CV, gardez-les sous ~5 Mo (compressez avec un outil comme [ilovepdf.com](https://www.ilovepdf.com)) et placez-les dans `assets/`.
-
 ## Aperçu en local
 
 Ouvrez simplement `index.html` dans un navigateur, ou lancez un petit serveur local :
