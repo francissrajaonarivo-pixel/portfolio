@@ -405,6 +405,10 @@ body {
   color: var(--text-soft);
 }
 
+/* Lisibilité de la carte : image plus nette + repères mieux contrastés */
+.sat-tiles { filter: saturate(1.2) contrast(1.12) brightness(1.03); }
+.labels-tiles { filter: contrast(1.25) drop-shadow(0 1px 2px rgba(0,0,0,0.9)); }
+
 /* Leaflet visual polish */
 .leaflet-control-layers {
   border-radius: 10px !important;

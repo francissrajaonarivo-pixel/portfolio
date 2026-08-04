@@ -17,6 +17,14 @@ function build3DStyle() {
         maxzoom: 19,
         attribution: "Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics",
       },
+      boundaries: {
+        type: "raster",
+        tiles: [
+          "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+        ],
+        tileSize: 256,
+        maxzoom: 16,
+      },
       terrainSource: {
         type: "raster-dem",
         tiles: ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
@@ -34,13 +42,19 @@ function build3DStyle() {
       },
     },
     layers: [
-      { id: "satellite", type: "raster", source: "satellite" },
+      {
+        id: "satellite",
+        type: "raster",
+        source: "satellite",
+        paint: { "raster-saturation": 0.25, "raster-contrast": 0.15 },
+      },
       {
         id: "hillshade",
         type: "hillshade",
         source: "hillshadeSource",
-        paint: { "hillshade-exaggeration": 0.4 },
+        paint: { "hillshade-exaggeration": 0.7 },
       },
+      { id: "boundaries", type: "raster", source: "boundaries" },
     ],
     terrain: { source: "terrainSource", exaggeration: 1.6 },
     sky: {
@@ -62,7 +76,7 @@ function init3D() {
     style: build3DStyle(),
     center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat],
     zoom: 11,
-    pitch: 68,
+    pitch: 58,
     bearing: -20,
     antialias: true,
     maxPitch: 85,

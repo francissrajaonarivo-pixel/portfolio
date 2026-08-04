@@ -22,30 +22,22 @@ const map = L.map("map", {
 }).setView([-14, 46.869], 2.5);
 
 // Fond satellite (Esri World Imagery — résolution variable selon la zone)
+// className applique un léger boost de contraste/saturation en CSS pour une image plus nette et lisible.
 const satellite = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   {
     attribution: "Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics",
     maxZoom: 28,
     maxNativeZoom: 19,
+    className: "sat-tiles",
   }
 );
 
-// Repères administratifs : régions, provinces, frontières
+// Repères de lecture : frontières, régions, villes/villages — couche unique conçue par Esri
+// spécifiquement pour être lue par-dessus de l'imagerie satellite (texte à halo contrasté).
 const boundaries = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 28, maxNativeZoom: 16 }
-);
-
-// Noms de lieux (villes, villages, quartiers) — couche dense, complémentaire
-const placeLabels = L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-  {
-    attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
-    maxZoom: 28,
-    maxNativeZoom: 18,
-    subdomains: "abcd",
-  }
+  { maxZoom: 28, maxNativeZoom: 16, className: "labels-tiles" }
 );
 
 const streets = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -54,8 +46,8 @@ const streets = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   maxNativeZoom: 19,
 });
 
-// Vue par défaut : satellite + toutes les couches de repères (régions, frontières, noms de lieux)
-const hybrid = L.layerGroup([satellite, boundaries, placeLabels]).addTo(map);
+// Vue par défaut : satellite + une seule couche de repères (évite le doublon de texte illisible)
+const hybrid = L.layerGroup([satellite, boundaries]).addTo(map);
 
 L.control
   .layers(
