@@ -602,6 +602,53 @@ a.contact-card:hover { background: rgba(255,255,255,0.14); }
   margin: 0 auto;
 }
 
+.message-form-wrap {
+  max-width: 520px;
+  margin: 0 auto 34px;
+  text-align: left;
+}
+.message-form-wrap .subsection-title.light {
+  color: white;
+  text-align: center;
+  margin: 0 0 16px;
+}
+.message-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.message-form input,
+.message-form textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: white;
+  font-family: inherit;
+  font-size: 0.92rem;
+  resize: vertical;
+}
+.message-form input::placeholder,
+.message-form textarea::placeholder { color: rgba(255,255,255,0.5); }
+.message-form input:focus,
+.message-form textarea:focus {
+  outline: none;
+  border-color: var(--c3);
+  background: rgba(255,255,255,0.12);
+}
+.message-form-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+}
+.message-form-actions .btn-ghost {
+  color: white;
+  border-color: rgba(255,255,255,0.3);
+}
+
 /* footer */
 .site-footer {
   padding: 24px 0;

@@ -36,3 +36,31 @@ themeToggle.addEventListener("click", () => {
   localStorage.setItem("theme", next);
   themeToggle.textContent = next === "dark" ? "☀️" : "🌙";
 });
+
+// Formulaire de message : envoi via WhatsApp (ou email en repli)
+const WHATSAPP_NUMBER = "261389510134";
+const CONTACT_EMAIL = "francissrajaonarivo@gmail.com";
+
+function buildContactMessage() {
+  const name = document.getElementById("cfName").value.trim();
+  const email = document.getElementById("cfEmail").value.trim();
+  const message = document.getElementById("cfMessage").value.trim();
+  let text = `Bonjour, je m'appelle ${name}.\n\n${message}`;
+  if (email) text += `\n\nMon email : ${email}`;
+  return text;
+}
+
+const contactForm = document.getElementById("contactForm");
+contactForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = buildContactMessage();
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+});
+
+document.getElementById("cfEmailFallback").addEventListener("click", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("cfName").value.trim();
+  const message = document.getElementById("cfMessage").value.trim();
+  const subject = `Message depuis le portfolio — ${name || "Visiteur"}`;
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+});
