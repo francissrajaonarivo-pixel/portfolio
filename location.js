@@ -79,19 +79,10 @@ setTimeout(() => {
   marker.openPopup();
 }, 3200);
 
-document.getElementById("zoomToMe").addEventListener("click", () => {
+function leafletZoomToMe() {
   map.flyTo([CURRENT_LOCATION.lat, CURRENT_LOCATION.lng], MY_ZOOM, { duration: 1.6 });
   marker.openPopup();
-});
-document.getElementById("zoomToMada").addEventListener("click", () => {
+}
+function leafletZoomToMada() {
   map.flyTo([MADAGASCAR_VIEW.lat, MADAGASCAR_VIEW.lng], MADAGASCAR_VIEW.zoom, { duration: 1.6 });
-});
-document.getElementById("zoomFullscreen").addEventListener("click", () => {
-  const el = document.getElementById("map");
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  } else {
-    el.requestFullscreen().then(() => setTimeout(() => map.invalidateSize(), 200));
-  }
-});
-document.addEventListener("fullscreenchange", () => setTimeout(() => map.invalidateSize(), 200));
+}

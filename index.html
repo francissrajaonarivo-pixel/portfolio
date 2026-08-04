@@ -199,11 +199,16 @@
         <button class="btn btn-ghost btn-sm" id="zoomToMe">🎯 Ma position</button>
         <button class="btn btn-ghost btn-sm" id="zoomToMada">🗺️ Madagascar entier</button>
         <button class="btn btn-ghost btn-sm" id="zoomFullscreen">⛶ Plein écran</button>
-        <button class="btn btn-primary btn-sm" id="toggle3D">🧊 Vue 3D</button>
+      </div>
+      <div class="view-tabs">
+        <button class="view-tab active" id="viewLeaflet">🗾 Carte</button>
+        <button class="view-tab" id="view3D">🧊 3D</button>
+        <button class="view-tab" id="viewGoogle">🌍 Google Maps</button>
       </div>
     </div>
     <div id="map" class="map-box"></div>
     <div id="map3d" class="map-box" style="display:none;"></div>
+    <div id="mapGoogle" class="map-box" style="display:none;"></div>
     <div class="container">
       <p class="map-hint" id="mapHint">Astuce : molette pour zoomer, sélecteur en haut à droite pour basculer Carte / Satellite / Hybride.</p>
     </div>
@@ -264,6 +269,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="location.js?v=6"></script>
 <script src="map3d.js?v=5"></script>
+<script src="googlemap.js?v=1"></script>
+<script src="viewswitch.js?v=1"></script>
 <script src="script.js"></script>
 </body>
 </html>

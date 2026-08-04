@@ -2,7 +2,6 @@
 // Réutilise CURRENT_LOCATION et MADAGASCAR_VIEW définis dans location.js.
 
 let map3dInstance = null;
-let is3D = false;
 
 function build3DStyle() {
   return {
@@ -104,26 +103,11 @@ function init3D() {
   });
 }
 
-document.getElementById("toggle3D").addEventListener("click", () => {
-  const map2dEl = document.getElementById("map");
-  const map3dEl = document.getElementById("map3d");
-  const btn = document.getElementById("toggle3D");
-  const hint = document.getElementById("mapHint");
-
-  is3D = !is3D;
-
-  if (is3D) {
-    map2dEl.style.display = "none";
-    map3dEl.style.display = "block";
-    btn.textContent = "🗾 Vue 2D";
-    hint.textContent = "Astuce : glisser-déposer pour pivoter, clic droit + glisser (ou 2 doigts) pour incliner le relief.";
-    init3D();
-    setTimeout(() => map3dInstance && map3dInstance.resize(), 150);
-  } else {
-    map3dEl.style.display = "none";
-    map2dEl.style.display = "block";
-    btn.textContent = "🧊 Vue 3D";
-    hint.textContent = "Astuce : molette pour zoomer, sélecteur en haut à droite pour basculer Carte / Satellite / Hybride.";
-    if (typeof map !== "undefined") setTimeout(() => map.invalidateSize(), 150);
-  }
-});
+function map3dZoomToMe() {
+  if (!map3dInstance) return;
+  map3dInstance.flyTo({ center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat], zoom: 14, pitch: 58, duration: 1600 });
+}
+function map3dZoomToMada() {
+  if (!map3dInstance) return;
+  map3dInstance.flyTo({ center: [MADAGASCAR_VIEW.lng, MADAGASCAR_VIEW.lat], zoom: 5.4, pitch: 40, duration: 1600 });
+}
