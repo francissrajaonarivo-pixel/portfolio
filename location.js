@@ -8,7 +8,7 @@ const CURRENT_LOCATION = {
 // ──────────────────────────────────────
 
 const MADAGASCAR_VIEW = { lat: -18.766, lng: 46.869, zoom: 5.4 };
-const MY_ZOOM = 18;
+const MY_ZOOM = 19.5;
 
 document.getElementById("locLabel").textContent = `📍 Position actuelle : ${CURRENT_LOCATION.name}`;
 

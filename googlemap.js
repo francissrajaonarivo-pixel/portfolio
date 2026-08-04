@@ -12,7 +12,7 @@ function initGoogle() {
   if (googleLoaded) return;
   const iframe = document.createElement("iframe");
   iframe.id = "googleMapsFrame";
-  iframe.src = googleEmbedUrl(CURRENT_LOCATION.lat, CURRENT_LOCATION.lng, 16);
+  iframe.src = googleEmbedUrl(CURRENT_LOCATION.lat, CURRENT_LOCATION.lng, 20);
   iframe.width = "100%";
   iframe.height = "100%";
   iframe.style.border = "0";

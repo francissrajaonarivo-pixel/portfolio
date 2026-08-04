@@ -105,7 +105,7 @@ function init3D() {
 
 function map3dZoomToMe() {
   if (!map3dInstance) return;
-  map3dInstance.flyTo({ center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat], zoom: 14, pitch: 58, duration: 1600 });
+  map3dInstance.flyTo({ center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat], zoom: 18.5, pitch: 58, duration: 1600 });
 }
 function map3dZoomToMada() {
   if (!map3dInstance) return;
