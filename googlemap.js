@@ -4,15 +4,16 @@
 const googleWrap = document.getElementById("mapGoogle");
 let googleLoaded = false;
 
-function googleEmbedUrl(lat, lng, zoom) {
-  return `https://www.google.com/maps?q=${lat},${lng}&z=${zoom}&t=h&output=embed`;
+function googleEmbedUrl(lat, lng, zoom, label) {
+  const q = label ? `${lat},${lng}(${label})` : `${lat},${lng}`;
+  return `https://www.google.com/maps?q=${encodeURIComponent(q)}&z=${zoom}&t=h&output=embed`;
 }
 
 function initGoogle() {
   if (googleLoaded) return;
   const iframe = document.createElement("iframe");
   iframe.id = "googleMapsFrame";
-  iframe.src = googleEmbedUrl(CURRENT_LOCATION.lat, CURRENT_LOCATION.lng, 20);
+  iframe.src = googleEmbedUrl(CURRENT_LOCATION.lat, CURRENT_LOCATION.lng, 20, CURRENT_LOCATION.name);
   iframe.width = "100%";
   iframe.height = "100%";
   iframe.style.border = "0";
@@ -25,7 +26,7 @@ function initGoogle() {
 
 function googleZoomToMe() {
   const iframe = document.getElementById("googleMapsFrame");
-  if (iframe) iframe.src = googleEmbedUrl(CURRENT_LOCATION.lat, CURRENT_LOCATION.lng, 16);
+  if (iframe) iframe.src = googleEmbedUrl(CURRENT_LOCATION.lat, CURRENT_LOCATION.lng, 20, CURRENT_LOCATION.name);
 }
 
 function googleZoomToMada() {
