@@ -98,16 +98,20 @@ function init3D() {
       .setPopup(new maplibregl.Popup({ offset: 18 }).setHTML(`📍 <strong>${CURRENT_LOCATION.name}</strong>`))
       .addTo(map3dInstance);
 
-    // Léger survol automatique pour révéler le relief à l'ouverture
-    map3dInstance.easeTo({ bearing: 40, duration: 6000 });
+    // Léger survol automatique pour révéler le relief à l'ouverture (sauf préférence "moins d'animations")
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      map3dInstance.easeTo({ bearing: 40, duration: 6000 });
+    }
   });
 }
 
 function map3dZoomToMe() {
   if (!map3dInstance) return;
-  map3dInstance.flyTo({ center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat], zoom: 18.5, pitch: 58, duration: 1600 });
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  map3dInstance.flyTo({ center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat], zoom: 18.5, pitch: 58, duration: reduceMotion ? 0 : 1600 });
 }
 function map3dZoomToMada() {
   if (!map3dInstance) return;
-  map3dInstance.flyTo({ center: [MADAGASCAR_VIEW.lng, MADAGASCAR_VIEW.lat], zoom: 5.4, pitch: 40, duration: 1600 });
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  map3dInstance.flyTo({ center: [MADAGASCAR_VIEW.lng, MADAGASCAR_VIEW.lat], zoom: 5.4, pitch: 40, duration: reduceMotion ? 0 : 1600 });
 }
