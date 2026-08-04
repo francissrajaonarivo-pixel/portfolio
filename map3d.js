@@ -79,7 +79,7 @@ function init3D() {
     bearing: -20,
     antialias: true,
     maxPitch: 85,
-    maxZoom: 24,
+    maxZoom: 20,
     minZoom: 0,
   });
 

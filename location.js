@@ -17,8 +17,9 @@ const map = L.map("map", {
   zoomDelta: 0.5,
   wheelPxPerZoomLevel: 60,
   minZoom: 3,
-  maxZoom: 28,
+  maxZoom: 20,
   worldCopyJump: true,
+  keepBuffer: 4,
 }).setView([-14, 46.869], 2.5);
 
 // Fond satellite (Esri World Imagery — résolution variable selon la zone)
@@ -27,7 +28,7 @@ const satellite = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   {
     attribution: "Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics",
-    maxZoom: 28,
+    maxZoom: 20,
     maxNativeZoom: 19,
     className: "sat-tiles",
   }
@@ -37,12 +38,12 @@ const satellite = L.tileLayer(
 // spécifiquement pour être lue par-dessus de l'imagerie satellite (texte à halo contrasté).
 const boundaries = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 28, maxNativeZoom: 16, className: "labels-tiles" }
+  { maxZoom: 20, maxNativeZoom: 16, className: "labels-tiles" }
 );
 
 const streets = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  maxZoom: 28,
+  maxZoom: 20,
   maxNativeZoom: 19,
 });
 
