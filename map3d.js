@@ -1,9 +1,7 @@
-// Vue 3D unique : relief réel + satellite, avec l'angle de caméra repris d'un lien Google Earth.
-// Réutilise CURRENT_LOCATION défini dans location.js.
+// Vue 3D : relief réel (élévation), inclinaison et rotation à la souris.
+// Réutilise CURRENT_LOCATION et MADAGASCAR_VIEW définis dans location.js.
 
-const FINAL_ZOOM = 19.3;
-const FINAL_PITCH = 45;
-const FINAL_BEARING = CURRENT_LOCATION.heading;
+let map3dInstance = null;
 
 function build3DStyle() {
   return {
@@ -69,66 +67,47 @@ function build3DStyle() {
   };
 }
 
-const map3dInstance = new maplibregl.Map({
-  container: "map3d",
-  style: build3DStyle(),
-  center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat],
-  zoom: 4,
-  pitch: 0,
-  bearing: 0,
-  antialias: true,
-  maxPitch: 85,
-  maxZoom: 20,
-  minZoom: 0,
-});
+function init3D() {
+  if (map3dInstance) return;
 
-map3dInstance.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
-map3dInstance.addControl(new maplibregl.TerrainControl({ source: "terrainSource", exaggeration: 1.6 }), "top-right");
-
-map3dInstance.on("load", () => {
-  map3dInstance.setTerrain({ source: "terrainSource", exaggeration: 1.6 });
-
-  const el = document.createElement("div");
-  el.className = "pulse-marker";
-  el.innerHTML = `<span class="pulse-dot"></span><span class="pulse-ring"></span>`;
-
-  new maplibregl.Marker({ element: el })
-    .setLngLat([CURRENT_LOCATION.lng, CURRENT_LOCATION.lat])
-    .setPopup(new maplibregl.Popup({ offset: 18 }).setHTML(`📍 <strong>${CURRENT_LOCATION.name}</strong>`))
-    .addTo(map3dInstance);
-
-  // Entrée cinématique : globe -> position exacte, à l'angle repris de Google Earth
-  setTimeout(() => {
-    map3dInstance.flyTo({
-      center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat],
-      zoom: FINAL_ZOOM,
-      pitch: FINAL_PITCH,
-      bearing: FINAL_BEARING,
-      duration: 4000,
-    });
-  }, 400);
-});
-
-function recenterView() {
-  map3dInstance.flyTo({
+  map3dInstance = new maplibregl.Map({
+    container: "map3d",
+    style: build3DStyle(),
     center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat],
-    zoom: FINAL_ZOOM,
-    pitch: FINAL_PITCH,
-    bearing: FINAL_BEARING,
-    duration: 1600,
+    zoom: 11,
+    pitch: 58,
+    bearing: -20,
+    antialias: true,
+    maxPitch: 85,
+    maxZoom: 20,
+    minZoom: 0,
+  });
+
+  map3dInstance.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+  map3dInstance.addControl(new maplibregl.TerrainControl({ source: "terrainSource", exaggeration: 1.6 }), "top-right");
+
+  map3dInstance.on("load", () => {
+    map3dInstance.setTerrain({ source: "terrainSource", exaggeration: 1.6 });
+
+    const el = document.createElement("div");
+    el.className = "pulse-marker";
+    el.innerHTML = `<span class="pulse-dot"></span><span class="pulse-ring"></span>`;
+
+    new maplibregl.Marker({ element: el })
+      .setLngLat([CURRENT_LOCATION.lng, CURRENT_LOCATION.lat])
+      .setPopup(new maplibregl.Popup({ offset: 18 }).setHTML(`📍 <strong>${CURRENT_LOCATION.name}</strong>`))
+      .addTo(map3dInstance);
+
+    // Léger survol automatique pour révéler le relief à l'ouverture
+    map3dInstance.easeTo({ bearing: 40, duration: 6000 });
   });
 }
 
-document.getElementById("recenterView").addEventListener("click", recenterView);
-
-document.getElementById("zoomFullscreen").addEventListener("click", () => {
-  const el = document.getElementById("map3d");
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  } else {
-    el.requestFullscreen().catch(() => {});
-  }
-});
-document.addEventListener("fullscreenchange", () => {
-  setTimeout(() => map3dInstance.resize(), 200);
-});
+function map3dZoomToMe() {
+  if (!map3dInstance) return;
+  map3dInstance.flyTo({ center: [CURRENT_LOCATION.lng, CURRENT_LOCATION.lat], zoom: 18.5, pitch: 58, duration: 1600 });
+}
+function map3dZoomToMada() {
+  if (!map3dInstance) return;
+  map3dInstance.flyTo({ center: [MADAGASCAR_VIEW.lng, MADAGASCAR_VIEW.lat], zoom: 5.4, pitch: 40, duration: 1600 });
+}

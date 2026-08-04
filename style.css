@@ -424,6 +424,32 @@ body {
   padding: 8px 16px;
   font-size: 0.85rem;
 }
+.view-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 18px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px;
+  width: fit-content;
+}
+.view-tab {
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.view-tab:hover { color: var(--text); }
+.view-tab.active {
+  background: var(--gradient);
+  color: white;
+}
 .map-box {
   width: 100%;
   height: 640px;
@@ -438,6 +464,29 @@ body {
   font-size: 0.85rem;
   color: var(--text-soft);
 }
+
+/* Lisibilité de la carte : image plus nette + repères mieux contrastés */
+.sat-tiles { filter: saturate(1.2) contrast(1.12) brightness(1.03); }
+.labels-tiles { filter: contrast(1.25) drop-shadow(0 1px 2px rgba(0,0,0,0.9)); }
+
+/* Leaflet visual polish */
+.leaflet-control-layers {
+  border-radius: 10px !important;
+  box-shadow: var(--shadow) !important;
+  border: none !important;
+  overflow: hidden;
+}
+.leaflet-bar {
+  border-radius: 10px !important;
+  box-shadow: var(--shadow) !important;
+  border: none !important;
+  overflow: hidden;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  font-weight: 600;
+}
+.leaflet-marker-icon { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35)); }
 
 .pulse-marker { position: relative; width: 22px; height: 22px; }
 .pulse-dot {
