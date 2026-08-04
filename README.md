@@ -8,21 +8,24 @@ Site portfolio statique (HTML/CSS/JS, sans dépendance), généré à partir du 
 2. **LinkedIn** : dans [index.html](index.html), remplacez le `href="#"` du lien `id="linkedinLink"` par l'URL réelle de votre profil LinkedIn.
 3. Relisez les textes des sections (Formation, Expériences, etc.) et ajustez si besoin.
 
-## Mettre à jour votre position sur la carte
+## Mettre à jour votre position sur la carte 3D
 
-Ouvrez [location.js](location.js) et modifiez uniquement les 3 valeurs en haut du fichier :
+La carte (section Localisation) est une vue 3D unique (relief + satellite), positionnée exactement comme un lien Google Earth.
 
-```js
-const CURRENT_LOCATION = {
-  name: "Votre ville, Madagascar",
-  lat: 0.0000,   // latitude
-  lng: 0.0000,   // longitude
-};
-```
+1. Ouvrez [Google Earth Web](https://earth.google.com/web/), placez-vous à l'endroit et à l'angle voulus, copiez le lien de la barre d'adresse. Il ressemble à :
+   `.../@LAT,LNG,ALTa,DISTd,FOVy,HEADINGh,TILTt,ROLLr/...`
+2. Ouvrez [location.js](location.js) et reportez les valeurs :
+   ```js
+   const CURRENT_LOCATION = {
+     name: "Votre lieu, Madagascar",
+     lat: LAT,       // 1ère valeur après le @
+     lng: LNG,       // 2ème valeur après le @
+     heading: HEADING, // la valeur juste avant le "h"
+   };
+   ```
+3. Republiez (commit + push).
 
-Pour trouver les coordonnées d'une ville, cherchez son nom sur [openstreetmap.org](https://www.openstreetmap.org), clic droit sur le point → "Afficher l'adresse" affiche lat/lng. Puis republiez (commit + push).
-
-**Important** : après chaque mise à jour de `location.js`, augmentez le numéro de version dans [index.html](index.html) (`location.js?v=3` → `?v=4`, etc.). Sans ça, les navigateurs qui ont déjà visité le site gardent l'ancienne position en cache jusqu'à 10 minutes.
+**Important** : après chaque mise à jour de `location.js`, augmentez le numéro de version dans [index.html](index.html) (`location.js?v=11` → `?v=12`, et `map3d.js?v=9` → `?v=10` si vous touchez aussi ce fichier). Sans ça, les navigateurs qui ont déjà visité le site gardent l'ancienne position en cache jusqu'à 10 minutes.
 
 ## Ajouter du contenu lourd (vidéos, photos HD, PDF de projets)
 
